@@ -1,5 +1,7 @@
 [build]
+  base = ""
   publish = "website"
+  command = "echo 'Deploying static files'"
 
 [[headers]]
   for = "/*"
