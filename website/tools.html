@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Tools | Dev-CLI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 10%;
+        }
+        .tool-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+        .tool-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        .tool-card h2 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        .tool-card .id {
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .tool-card p {
+            font-size: 0.95rem;
+            color: #d1d5db;
+            margin-bottom: 1.5rem;
+        }
+        .tool-card .install-cmd {
+            background: #000;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .tool-card .copy-mini {
+            color: var(--primary);
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        header {
+            text-align: center;
+            padding: 6rem 10% 2rem;
+        }
+        header h1 { font-size: 3.5rem; margin-bottom: 1rem; }
+        header p { color: var(--text-muted); font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+    <div class="background-blob blob-1"></div>
+    <div class="background-blob blob-2"></div>
+    
+    <nav>
+        <a href="index.html" class="logo">dev-cli<span>.</span></a>
+        <div class="nav-links">
+            <a href="index.html#features">Features</a>
+            <a href="tools.html" class="active">Tools</a>
+            <a href="docs.html">Docs</a>
+            <a href="https://github.com" class="github-btn">GitHub</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Curated <span class="gradient-text">Tools</span></h1>
+        <p>A list of battle-tested tools you can install instantly.</p>
+    </header>
+
+    <div class="tools-grid">
+        <!-- Node.js -->
+        <div class="tool-card">
+            <h2>Node.js</h2>
+            <span class="id">OpenJS.NodeJS</span>
+            <p>JavaScript runtime built on Chrome's V8 JavaScript engine.</p>
+            <div class="install-cmd">
+                <code>dev-cli install nodejs</code>
+                <span class="copy-mini">COPY</span>
+            </div>
+        </div>
+        <!-- Python -->
+        <div class="tool-card">
+            <h2>Python</h2>
+            <span class="id">Python.Python.3</span>
+            <p>Interpreted, high-level, general-purpose programming language.</p>
+            <div class="install-cmd">
+                <code>dev-cli install python</code>
+                <span class="copy-mini">COPY</span>
+            </div>
+        </div>
+        <!-- Git -->
+        <div class="tool-card">
+            <h2>Git</h2>
+            <span class="id">Git.Git</span>
+            <p>Distributed version control system for tracking changes.</p>
+            <div class="install-cmd">
+                <code>dev-cli install git</code>
+                <span class="copy-mini">COPY</span>
+            </div>
+        </div>
+        <!-- VS Code -->
+        <div class="tool-card">
+            <h2>VS Code</h2>
+            <span class="id">Microsoft.VisualStudioCode</span>
+            <p>Streamlined code editor with support for debugging and Git.</p>
+            <div class="install-cmd">
+                <code>dev-cli install vscode</code>
+                <span class="copy-mini">COPY</span>
+            </div>
+        </div>
+        <!-- Go -->
+        <div class="tool-card">
+            <h2>Go</h2>
+            <span class="id">Google.Go</span>
+            <p>Open-source programming language that makes it easy to build simple, reliable software.</p>
+            <div class="install-cmd">
+                <code>dev-cli install go</code>
+                <span class="copy-mini">COPY</span>
+            </div>
+        </div>
+        <!-- Docker -->
+        <div class="tool-card">
+            <h2>Docker</h2>
+            <span class="id">Docker.DockerDesktop</span>
+            <p>OS-level virtualization to deliver software in containers.</p>
+            <div class="install-cmd">
+                <code>dev-cli install docker</code>
+                <span class="copy-mini">COPY</span>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Dev-CLI. Built with ❤️ and <span class="rust-color">Rust</span>.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.copy-mini').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const cmd = btn.previousElementSibling.innerText;
+                navigator.clipboard.writeText(cmd).then(() => {
+                    const originalText = btn.innerText;
+                    btn.innerText = 'COPIED!';
+                    btn.style.color = '#27c93f';
+                    setTimeout(() => {
+                        btn.innerText = originalText;
+                        btn.style.color = 'var(--primary)';
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

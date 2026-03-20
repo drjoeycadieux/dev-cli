@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev-CLI | The Modern Windows Tool Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blob blob-1"></div>
+    <div class="background-blob blob-2"></div>
+    
+    <nav>
+        <div class="logo">dev-cli<span>.</span></div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="tools.html">Tools</a>
+            <a href="docs.html">Docs</a>
+            <a href="https://github.com" class="github-btn">GitHub</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <span class="badge">Windows Ready v0.1.0</span>
+                <h1>Supercharge Your <span class="gradient-text">Windows</span> Development</h1>
+                <p>An ultra-fast, modern developer CLI built with Rust. Install, manage, and discover your favorite dev tools with a single command.</p>
+                
+                <div class="cta-group">
+                    <a href="docs.html#installation" class="btn primary">Get Started</a>
+                    <a href="tools.html" class="btn secondary">View Tools</a>
+                </div>
+            </div>
+
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                    <span class="terminal-title">PowerShell</span>
+                </div>
+                <div class="terminal-body" id="terminal">
+                    <div class="line"><span class="prompt">PS C:\></span> <span class="command">dev-cli install nodejs</span></div>
+                    <div class="line status">🚀 Preparing to install nodejs...</div>
+                    <div class="line progress">⠁ Installing NodeJS via winget... [█████████████▒▒▒] 85%</div>
+                    <div class="line success">✔ Successfully installed nodejs!</div>
+                    <div class="line"><span class="prompt">PS C:\></span> <span class="cursor">|</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="feature-card">
+                <div class="icon">🦀</div>
+                <h3>Built with Rust</h3>
+                <p>Blazing fast performance and memory safety. Built for the modern developer.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📦</div>
+                <h3>One-Command Install</h3>
+                <p>Zero friction. No more hunting for installers. Just `dev-cli install` and you're set.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">💻</div>
+                <h3>Windows Native</h3>
+                <p>Optimized for Windows with built-in `winget` integration and modern aesthetics.</p>
+            </div>
+        </section>
+
+        <section id="install" class="install-section">
+            <div class="install-box">
+                <h2>Ready to level up?</h2>
+                <p>Paste this command into your terminal to install Dev-CLI:</p>
+                <div class="copy-box">
+                    <code>iwr -useb https://dev-cli.io/install.ps1 | iex</code>
+                    <button class="copy-btn">Copy</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Dev-CLI. Built with ❤️ and <span class="rust-color">Rust</span>.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
