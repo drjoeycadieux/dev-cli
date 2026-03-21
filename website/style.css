@@ -59,14 +59,28 @@ h1, h2, h3, .logo {
 
 /* Announcement Banner */
 .announcement-banner {
-    background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(168, 85, 247, 0.2));
-    border-bottom: 1px solid rgba(6, 182, 212, 0.3);
+    background: linear-gradient(135deg, #ff9500, #ff7300);
+    border-bottom: 3px solid #ff6b00;
     padding: 1rem;
     text-align: center;
     position: sticky;
     top: 0;
     z-index: 1001;
     backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.announcement-banner::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 15px solid #ff9500;
+    flex-shrink: 0;
 }
 
 .announcement-banner p {
