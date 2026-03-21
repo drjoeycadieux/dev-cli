@@ -182,3 +182,55 @@ async fn install_generic(tool_id: &str) -> Result<()> {
 
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_tools_exist() {
+        assert!(!TOOLS.is_empty(), "Tools list should not be empty");
+    }
+
+    #[test]
+    fn test_nodejs_tool_exists() {
+        let nodejs = TOOLS.iter().find(|t| t.name == "nodejs");
+        assert!(nodejs.is_some(), "nodejs tool should be in the list");
+        
+        if let Some(tool) = nodejs {
+            assert_eq!(tool.binary, "node");
+            assert_eq!(tool.id, "OpenJS.NodeJS");
+        }
+    }
+
+    #[test]
+    fn test_python_tool_exists() {
+        let python = TOOLS.iter().find(|t| t.name == "python");
+        assert!(python.is_some(), "python tool should be in the list");
+        
+        if let Some(tool) = python {
+            assert_eq!(tool.binary, "python");
+            assert_eq!(tool.id, "Python.Python.3");
+        }
+    }
+
+    #[test]
+    fn test_git_tool_exists() {
+        let git = TOOLS.iter().find(|t| t.name == "git");
+        assert!(git.is_some(), "git tool should be in the list");
+        
+        if let Some(tool) = git {
+            assert_eq!(tool.binary, "git");
+        }
+    }
+
+    #[test]
+    fn test_all_tools_have_valid_properties() {
+        for tool in TOOLS {
+            assert!(!tool.name.is_empty(), "Tool name should not be empty");
+            assert!(!tool.id.is_empty(), "Tool id should not be empty");
+            assert!(!tool.binary.is_empty(), "Tool binary should not be empty");
+            assert!(!tool.description.is_empty(), "Tool description should not be empty");
+        }
+    }
+}
