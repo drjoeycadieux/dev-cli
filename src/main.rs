@@ -7,6 +7,7 @@ use which::which;
 
 #[derive(Parser)]
 #[command(name = "dev-cli")]
+#[command(version)]
 #[command(about = "A modern developer CLI for Windows", long_about = None)]
 struct Cli {
     #[command(subcommand)]

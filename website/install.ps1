@@ -14,13 +14,15 @@ if (!(Get-Command winget -ErrorAction SilentlyContinue)) {
 
 Write-Host "✔ Winget is available!" -ForegroundColor Green
 
-# Since we are in development, we'll provide instructions for building from source
-# In a real production scenario, this script would download the compiled .exe
-Write-Host "`nTo complete the installation, you need to build the project from source:" -ForegroundColor White
+Write-Host "`n--- Local Setup (Developer) ---" -ForegroundColor Cyan
+Write-Host "Since you have the source code, you can run the local setup script:"
+Write-Host "./setup.ps1"
+Write-Host "`n--- General Installation ---" -ForegroundColor Gray
+Write-Host "To complete the installation manually, you need to build the project from source:"
 Write-Host "1. git clone https://github.com/drjoeycadieux/dev-cli"
 Write-Host "2. cd dev-cli"
 Write-Host "3. cargo build --release"
-Write-Host "`nThen move 'target/release/dev-cli.exe' to your PATH." -ForegroundColor Gray
+Write-Host "4. ./setup.ps1  <-- NEW: Run the setup script to add to PATH"
 
-Write-Host "`n--- Or use it to install tools directly via winget ---" -ForegroundColor Cyan
+Write-Host "`n--- Usage ---" -ForegroundColor Cyan
 Write-Host "Usage: dev-cli install <tool>"
