@@ -68,10 +68,6 @@
             margin-bottom: 1rem;
             color: var(--text);
         }
-        @media (max-width: 768px) {
-            .docs-container { grid-template-columns: 1fr; }
-            .docs-sidebar { display: none; }
-        }
     </style>
 </head>
 <body>
@@ -86,6 +82,9 @@
             <a href="docs.html" class="active">Docs</a>
             <a href="https://github.com/drjoeycadieux/dev-cli" class="github-btn">GitHub</a>
         </div>
+        <button class="mobile-menu-btn" aria-label="Toggle menu">
+            <div class="hamburger"></div>
+        </button>
     </nav>
 
     <div class="docs-container">
@@ -150,27 +149,6 @@ dev-cli --help   # Show help information
         <p>&copy; 2026 Dev-CLI. Built with ❤️ and <span class="rust-color">Rust</span>.</p>
     </footer>
 
-    <script>
-        // Simple scrollspy for docs
-        const links = document.querySelectorAll('.docs-sidebar a');
-        const sections = document.querySelectorAll('section');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 150) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            links.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(current)) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

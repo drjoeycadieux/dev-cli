@@ -78,6 +78,9 @@
             <a href="docs.html">Docs</a>
             <a href="https://github.com/drjoeycadieux/dev-cli" class="github-btn">GitHub</a>
         </div>
+        <button class="mobile-menu-btn" aria-label="Toggle menu">
+            <div class="hamburger"></div>
+        </button>
     </nav>
 
     <header>
@@ -152,21 +155,7 @@
         <p>&copy; 2026 Dev-CLI. Built with ❤️ and <span class="rust-color">Rust</span>.</p>
     </footer>
 
-    <script>
-        document.querySelectorAll('.copy-mini').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const cmd = btn.previousElementSibling.innerText;
-                navigator.clipboard.writeText(cmd).then(() => {
-                    const originalText = btn.innerText;
-                    btn.innerText = 'COPIED!';
-                    btn.style.color = '#27c93f';
-                    setTimeout(() => {
-                        btn.innerText = originalText;
-                        btn.style.color = 'var(--primary)';
-                    }, 2000);
-                });
-            });
-        });
-    </script>
+    <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

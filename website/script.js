@@ -1,53 +1,81 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const terminal = document.getElementById('terminal');
-    const copyBtn = document.querySelector('.copy-btn');
-    const copyBox = document.querySelector('.copy-box code');
+    // --- Mobile Menu Toggle ---
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
 
-    // Simple terminal animation
-    const lines = [
-        '<span class="prompt">PS C:\\></span> <span class="command">dev-cli install nodejs</span>',
-        '<div class="status">🚀 Preparing to install nodejs...</div>',
-        '<div class="progress">⠁ Installing NodeJS via winget... [█████████████▒▒▒] 85%</div>',
-        '<div class="success">✔ Successfully installed nodejs!</div>',
-        '<span class="prompt">PS C:\\></span> <span class="cursor">|</span>'
-    ];
+    if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
 
-    let currentLine = 0;
-    terminal.innerHTML = '';
-
-    function typeLine() {
-        if (currentLine < lines.length) {
-            const div = document.createElement('div');
-            div.className = 'line';
-            div.innerHTML = lines[currentLine];
-            terminal.appendChild(div);
-            currentLine++;
-            setTimeout(typeLine, 800);
-        }
+        // Close menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
     }
 
-    typeLine();
+    // --- Terminal Animation (Index only) ---
+    const terminal = document.getElementById('terminal');
+    if (terminal) {
+        const lines = [
+            '<span class="prompt">PS C:\\></span> <span class="command">dev-cli install nodejs</span>',
+            '<div class="status">🚀 Preparing to install nodejs...</div>',
+            '<div class="progress">⠁ Installing NodeJS via winget... [█████████████▒▒▒] 85%</div>',
+            '<div class="success">✔ Successfully installed nodejs!</div>',
+            '<span class="prompt">PS C:\\></span> <span class="cursor">|</span>'
+        ];
 
-    // Copy to clipboard
-    copyBtn.addEventListener('click', () => {
-        const textToCopy = copyBox.innerText;
-        navigator.clipboard.writeText(textToCopy).then(() => {
-            copyBtn.innerText = 'Copied!';
-            copyBtn.style.background = '#27c93f';
-            setTimeout(() => {
-                copyBtn.innerText = 'Copy';
-                copyBtn.style.background = '#06b6d4';
-            }, 2000);
+        let currentLine = 0;
+        terminal.innerHTML = '';
+
+        function typeLine() {
+            if (currentLine < lines.length) {
+                const div = document.createElement('div');
+                div.className = 'line';
+                div.innerHTML = lines[currentLine];
+                terminal.appendChild(div);
+                currentLine++;
+                setTimeout(typeLine, 800);
+            }
+        }
+        typeLine();
+    }
+
+    // --- Copy to Clipboard (Global) ---
+    const copyBtns = document.querySelectorAll('.copy-btn, .copy-mini');
+    copyBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const codeEl = btn.parentElement.querySelector('code, pre');
+            const textToCopy = codeEl ? codeEl.innerText : btn.previousElementSibling.innerText;
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalText = btn.innerText;
+                btn.innerText = (originalText.toLowerCase() === 'copy') ? 'Copied!' : 'COPIED!';
+                if (btn.classList.contains('copy-mini')) btn.style.color = '#27c93f';
+                
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    if (btn.classList.contains('copy-mini')) btn.style.color = 'var(--primary)';
+                }, 2000);
+            });
         });
     });
 
-    // Smooth scrolling for anchor links
+    // --- Smooth Scrolling ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const target = document.querySelector(targetId);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     });
 });
