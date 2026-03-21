@@ -21,6 +21,7 @@
         <div class="logo">dev-cli<span>.</span></div>
         <div class="nav-links">
             <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
             <a href="tools.html">Tools</a>
             <a href="docs.html">Docs</a>
             <a href="https://github.com/drjoeycadieux/dev-cli" class="github-btn">GitHub</a>
@@ -75,6 +76,79 @@
                 <div class="icon">💻</div>
                 <h3>Windows Native</h3>
                 <p>Optimized for Windows with built-in `winget` integration and modern aesthetics.</p>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="how-it-works">
+            <h2>How It Works</h2>
+            <p class="section-subtitle">Three simple steps to install any developer tool</p>
+            
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Open PowerShell</h3>
+                    <p>Launch PowerShell on your Windows machine and navigate to your project directory.</p>
+                </div>
+                
+                <div class="step-arrow">→</div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Run the Command</h3>
+                    <p>Type <code>dev-cli install [tool-name]</code> (e.g., <code>dev-cli install nodejs</code>)</p>
+                </div>
+                
+                <div class="step-arrow">→</div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Done!</h3>
+                    <p>Dev-CLI automatically downloads and installs your tool via winget. No manual configuration needed.</p>
+                </div>
+            </div>
+
+            <div class="workflow-example">
+                <h3>Example Workflow</h3>
+                <div class="code-block">
+                    <div class="code-line">
+                        <span class="prompt">PS C:\project></span>
+                        <span class="command">dev-cli install git</span>
+                    </div>
+                    <div class="code-line status">🔍 Searching for git...</div>
+                    <div class="code-line status">📥 Downloading...</div>
+                    <div class="code-line success">✅ Git installed successfully!</div>
+                    <div class="code-line">
+                        <span class="prompt">PS C:\project></span>
+                        <span class="command">git --version</span>
+                    </div>
+                    <div class="code-line">git version 2.42.0</div>
+                </div>
+            </div>
+
+            <div class="features-workflow">
+                <h3>Why Dev-CLI?</h3>
+                <div class="workflow-features">
+                    <div class="workflow-feature">
+                        <span class="workflow-icon">⚡</span>
+                        <h4>Lightning Fast</h4>
+                        <p>Built with Rust for maximum speed and efficiency.</p>
+                    </div>
+                    <div class="workflow-feature">
+                        <span class="workflow-icon">🛡️</span>
+                        <h4>Reliable</h4>
+                        <p>No broken scripts. Validate and test everything.</p>
+                    </div>
+                    <div class="workflow-feature">
+                        <span class="workflow-icon">🔄</span>
+                        <h4>Consistent</h4>
+                        <p>Same behaviour across all Windows installations.</p>
+                    </div>
+                    <div class="workflow-feature">
+                        <span class="workflow-icon">📚</span>
+                        <h4>Discover Tools</h4>
+                        <p>Browse and explore tools with built-in recommendations.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
