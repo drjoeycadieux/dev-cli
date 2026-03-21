@@ -32,44 +32,176 @@ struct Tool {
     id: &'static str,
     description: &'static str,
     binary: &'static str,
+    category: &'static str,
 }
 
 const TOOLS: &[Tool] = &[
+    // Languages
     Tool {
         name: "nodejs",
         id: "OpenJS.NodeJS",
         description: "Node.js JavaScript runtime",
         binary: "node",
+        category: "Languages",
     },
     Tool {
         name: "python",
         id: "Python.Python.3",
         description: "Python programming language",
         binary: "python",
-    },
-    Tool {
-        name: "git",
-        id: "Git.Git",
-        description: "Git version control system",
-        binary: "git",
-    },
-    Tool {
-        name: "vscode",
-        id: "Microsoft.VisualStudioCode",
-        description: "Visual Studio Code editor",
-        binary: "code",
+        category: "Languages",
     },
     Tool {
         name: "go",
         id: "Google.Go",
         description: "Go programming language",
         binary: "go",
+        category: "Languages",
     },
+    Tool {
+        name: "rust",
+        id: "Rustlang.Rust.MSVC",
+        description: "Rust programming language",
+        binary: "rustc",
+        category: "Languages",
+    },
+    Tool {
+        name: "java",
+        id: "Oracle.JDK.21",
+        description: "Java Development Kit",
+        binary: "java",
+        category: "Languages",
+    },
+    Tool {
+        name: "php",
+        id: "PHP.PHP",
+        description: "PHP scripting language",
+        binary: "php",
+        category: "Languages",
+    },
+    
+    // Version Control
+    Tool {
+        name: "git",
+        id: "Git.Git",
+        description: "Git version control system",
+        binary: "git",
+        category: "Version Control",
+    },
+    Tool {
+        name: "github-cli",
+        id: "GitHub.cli",
+        description: "GitHub command line interface",
+        binary: "gh",
+        category: "Version Control",
+    },
+    
+    // Editors & IDEs
+    Tool {
+        name: "vscode",
+        id: "Microsoft.VisualStudioCode",
+        description: "Visual Studio Code editor",
+        binary: "code",
+        category: "Editors",
+    },
+    Tool {
+        name: "vim",
+        id: "vim.vim",
+        description: "Vim text editor",
+        binary: "vim",
+        category: "Editors",
+    },
+    Tool {
+        name: "notepad++",
+        id: "Notepad++.Notepad++",
+        description: "Notepad++ text editor",
+        binary: "notepad++",
+        category: "Editors",
+    },
+    
+    // Build & Package Managers
+    Tool {
+        name: "cmake",
+        id: "Kitware.CMake",
+        description: "CMake build system",
+        binary: "cmake",
+        category: "Build Tools",
+    },
+    Tool {
+        name: "gradle",
+        id: "Gradle.Gradle",
+        description: "Gradle build automation",
+        binary: "gradle",
+        category: "Build Tools",
+    },
+    Tool {
+        name: "maven",
+        id: "Apache.Maven",
+        description: "Apache Maven build tool",
+        binary: "mvn",
+        category: "Build Tools",
+    },
+    
+    // Container & Virtualization
     Tool {
         name: "docker",
         id: "Docker.DockerDesktop",
-        description: "Docker Desktop",
+        description: "Docker Desktop containers",
         binary: "docker",
+        category: "Containers",
+    },
+    Tool {
+        name: "kubectl",
+        id: "Kubernetes.kubectl",
+        description: "Kubernetes command line tool",
+        binary: "kubectl",
+        category: "Containers",
+    },
+    
+    // Databases
+    Tool {
+        name: "postgresql",
+        id: "PostgreSQL.PostgreSQL",
+        description: "PostgreSQL database system",
+        binary: "psql",
+        category: "Databases",
+    },
+    Tool {
+        name: "mysql",
+        id: "MySQL.MySQL.8.0",
+        description: "MySQL database system",
+        binary: "mysql",
+        category: "Databases",
+    },
+    Tool {
+        name: "mongodb",
+        id: "MongoDB.Server",
+        description: "MongoDB NoSQL database",
+        binary: "mongod",
+        category: "Databases",
+    },
+    
+    // Cloud & DevOps
+    Tool {
+        name: "aws-cli",
+        id: "Amazon.AWSCLI",
+        description: "AWS command line interface",
+        binary: "aws",
+        category: "Cloud",
+    },
+    Tool {
+        name: "azure-cli",
+        id: "Microsoft.AzureCLI",
+        description: "Azure command line interface",
+        binary: "az",
+        category: "Cloud",
+    },
+    Tool {
+        name: "terraform",
+        id: "HashiCorp.Terraform",
+        description: "Terraform infrastructure automation",
+        binary: "terraform",
+        category: "Cloud",
     },
 ];
 
@@ -79,17 +211,25 @@ async fn main() -> Result<()> {
 
     match cli.command {
         Commands::List => {
-            println!("\n{}", "Available Developer Tools:".bold().cyan());
-            println!("{:-<50}", "");
+            println!("\n{}", "📦 Available Developer Tools:".bold().cyan());
+            println!("{:-<70}", "");
+            
+            let mut current_category = "";
             for tool in TOOLS {
+                if tool.category != current_category {
+                    current_category = tool.category;
+                    println!("\n{}", format!("  {} {}", "📁", current_category).bold().yellow());
+                    println!("  {:-<66}", "");
+                }
                 println!(
-                    "{:<10} | {:<25} | {}",
-                    tool.name.green().bold(),
-                    tool.id.dimmed(),
-                    tool.description
+                    "  {:<15} {} {}",
+                    tool.name.green(),
+                    "→".cyan(),
+                    tool.description.dimmed()
                 );
             }
-            println!("{:-<50}\n", "");
+            println!("{:-<70}\n", "");
+            println!("{} Total tools available: {}\n", "✨".yellow(), TOOLS.len());
         }
         Commands::Install { tool } => {
             let tool_info = TOOLS.iter().find(|t| t.name == tool || t.id == tool);
@@ -193,6 +333,11 @@ mod tests {
     }
 
     #[test]
+    fn test_tools_count() {
+        assert!(TOOLS.len() >= 20, "Should have at least 20 tools");
+    }
+
+    #[test]
     fn test_nodejs_tool_exists() {
         let nodejs = TOOLS.iter().find(|t| t.name == "nodejs");
         assert!(nodejs.is_some(), "nodejs tool should be in the list");
@@ -200,6 +345,7 @@ mod tests {
         if let Some(tool) = nodejs {
             assert_eq!(tool.binary, "node");
             assert_eq!(tool.id, "OpenJS.NodeJS");
+            assert_eq!(tool.category, "Languages");
         }
     }
 
@@ -211,6 +357,7 @@ mod tests {
         if let Some(tool) = python {
             assert_eq!(tool.binary, "python");
             assert_eq!(tool.id, "Python.Python.3");
+            assert_eq!(tool.category, "Languages");
         }
     }
 
@@ -221,6 +368,17 @@ mod tests {
         
         if let Some(tool) = git {
             assert_eq!(tool.binary, "git");
+            assert_eq!(tool.category, "Version Control");
+        }
+    }
+
+    #[test]
+    fn test_docker_tool_exists() {
+        let docker = TOOLS.iter().find(|t| t.name == "docker");
+        assert!(docker.is_some(), "docker tool should be in the list");
+        
+        if let Some(tool) = docker {
+            assert_eq!(tool.category, "Containers");
         }
     }
 
@@ -231,6 +389,38 @@ mod tests {
             assert!(!tool.id.is_empty(), "Tool id should not be empty");
             assert!(!tool.binary.is_empty(), "Tool binary should not be empty");
             assert!(!tool.description.is_empty(), "Tool description should not be empty");
+            assert!(!tool.category.is_empty(), "Tool category should not be empty");
         }
+    }
+
+    #[test]
+    fn test_all_tools_have_categories() {
+        let valid_categories = vec![
+            "Languages",
+            "Version Control",
+            "Editors",
+            "Build Tools",
+            "Containers",
+            "Databases",
+            "Cloud",
+        ];
+        
+        for tool in TOOLS {
+            assert!(
+                valid_categories.contains(&tool.category),
+                "Tool {} has invalid category: {}",
+                tool.name,
+                tool.category
+            );
+        }
+    }
+
+    #[test]
+    fn test_no_duplicate_tool_names() {
+        let mut names: Vec<&str> = TOOLS.iter().map(|t| t.name).collect();
+        let original_len = names.len();
+        names.sort();
+        names.dedup();
+        assert_eq!(names.len(), original_len, "Found duplicate tool names");
     }
 }
