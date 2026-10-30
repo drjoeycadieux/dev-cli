@@ -4,91 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Documentation | Dev-CLI</title>
+    <meta name="description" content="Install Dev-CLI and learn how to list, install and check developer tools on Windows with one command.">
+    <meta name="theme-color" content="#09090b">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Documentation | Dev-CLI">
+    <meta property="og:description" content="Everything you need to install and use Dev-CLI on Windows.">
+    <meta property="og:url" content="https://dev-cli.netlify.app/docs.html">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2309090b'/%3E%3Ctext x='14' y='45' font-family='monospace' font-size='38' fill='%2306b6d4'%3E%26gt;_%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        .docs-container {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 4rem;
-            padding: 4rem 10%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        .docs-sidebar {
-            position: sticky;
-            top: 100px;
-            height: fit-content;
-        }
-        .docs-sidebar ul {
-            list-style: none;
-        }
-        .docs-sidebar li {
-            margin-bottom: 1rem;
-        }
-        .docs-sidebar a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 1rem;
-            transition: 0.3s;
-        }
-        .docs-sidebar a:hover, .docs-sidebar a.active {
-            color: var(--primary);
-        }
-        .docs-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            margin-top: 3rem;
-        }
-        .docs-content h2:first-child {
-            margin-top: 0;
-        }
-        .docs-content p {
-            font-size: 1.1rem;
-            color: #d1d5db;
-            margin-bottom: 1.5rem;
-        }
-        .code-block {
-            background: #000;
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            margin-bottom: 2rem;
-            position: relative;
-        }
-        .code-block pre {
-            font-family: 'Consolas', monospace;
-            color: var(--primary);
-            overflow-x: auto;
-        }
-        .docs-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text);
-        }
-    </style>
 </head>
 <body>
     <div class="background-blob blob-1"></div>
     <div class="background-blob blob-2"></div>
-    
+
+    <a href="#main" class="skip-link">Skip to content</a>
+
     <nav>
         <a href="index.html" class="logo">dev-cli<span>.</span></a>
-        <div class="nav-links">
+        <div class="nav-links" id="nav-links">
             <a href="index.html#features">Features</a>
+            <a href="index.html#how-it-works">How It Works</a>
+            <a href="index.html#demo">Demo</a>
             <a href="tools.html">Tools</a>
-            <a href="docs.html" class="active">Docs</a>
+            <a href="docs.html" class="active" aria-current="page">Docs</a>
             <a href="https://github.com/drjoeycadieux/dev-cli" class="github-btn">GitHub</a>
         </div>
-        <button class="mobile-menu-btn" aria-label="Toggle menu">
-            <div class="hamburger"></div>
+        <button type="button" class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+            <span class="hamburger" aria-hidden="true"></span>
         </button>
     </nav>
 
-    <div class="docs-container">
-        <aside class="docs-sidebar">
+    <div class="docs-container" id="main">
+        <aside class="docs-sidebar" aria-label="Documentation sections">
             <ul>
                 <li><a href="#introduction" class="active">Introduction</a></li>
                 <li><a href="#installation">Installation</a></li>
@@ -109,10 +59,12 @@
                 <h2>Installation</h2>
                 <p>To install Dev-CLI, run the following command in an administrative PowerShell window:</p>
                 <div class="code-block">
+                    <button type="button" class="copy-mini" data-copy="iwr -useb https://dev-cli.netlify.app/install.ps1 | iex">COPY</button>
                     <pre>iwr -useb https://dev-cli.netlify.app/install.ps1 | iex</pre>
                 </div>
                 <p>Verify the installation by running:</p>
                 <div class="code-block">
+                    <button type="button" class="copy-mini" data-copy="dev-cli --version">COPY</button>
                     <pre>dev-cli --version</pre>
                 </div>
             </section>
@@ -120,35 +72,64 @@
             <section id="basic-usage">
                 <h2>Basic Usage</h2>
                 <p>The core philosophy of Dev-CLI is simplicity. Most operations can be done with a single command.</p>
+
                 <h3>Installing a tool</h3>
                 <p>To install a tool from our curated list, simply use:</p>
                 <div class="code-block">
+                    <button type="button" class="copy-mini" data-copy="dev-cli install nodejs">COPY</button>
                     <pre>dev-cli install nodejs</pre>
                 </div>
                 <p>You can also install any package by its winget ID:</p>
                 <div class="code-block">
+                    <button type="button" class="copy-mini" data-copy="dev-cli install Microsoft.PowerShell">COPY</button>
                     <pre>dev-cli install Microsoft.PowerShell</pre>
+                </div>
+
+                <h3>Discovering tools</h3>
+                <p>List the curated catalog, or check which tools are already available on your machine:</p>
+                <div class="code-block">
+                    <button type="button" class="copy-mini" data-copy="dev-cli list">COPY</button>
+                    <pre>dev-cli list
+dev-cli check</pre>
                 </div>
             </section>
 
             <section id="commands">
                 <h2>Commands Reference</h2>
                 <div class="code-block">
-                    <pre>
-dev-cli list     # Show all curated tools
+                    <button type="button" class="copy-mini" data-copy="dev-cli list     # Show all curated tools
 dev-cli install  # Install a specific tool
 dev-cli check    # Check system for installed tools
-dev-cli --help   # Show help information
-                    </pre>
+dev-cli --help   # Show help information">COPY</button>
+                    <pre>dev-cli list     # Show all curated tools
+dev-cli install  # Install a specific tool
+dev-cli check    # Check system for installed tools
+dev-cli --help   # Show help information</pre>
                 </div>
+            </section>
+
+            <section id="troubleshooting">
+                <h2>Troubleshooting</h2>
+                <h3>winget is not recognized</h3>
+                <p>Install or update the <a href="https://apps.microsoft.com/detail/9nblggh4nns1" target="_blank" rel="noopener">App Installer</a> from the Microsoft Store, then restart PowerShell. Dev-CLI uses winget under the hood for every install.</p>
+
+                <h3>The install command exits with an error</h3>
+                <p>Some packages require an elevated shell. Right-click PowerShell and choose <strong>Run as administrator</strong>, then retry. You can also append <code>--accept-package-agreements</code> manually if a package prompts for consent.</p>
+
+                <h3>A tool is installed but not detected by <code>dev-cli check</code></h3>
+                <p>Open a new terminal so your <code>PATH</code> picks up the freshly installed binary. If it still isn't found, confirm the binary is on your <code>PATH</code> with <code>where.exe &lt;binary&gt;</code>.</p>
+
+                <h3>Still stuck?</h3>
+                <p>Open an issue on <a href="https://github.com/drjoeycadieux/dev-cli/issues" target="_blank" rel="noopener">GitHub</a> with the command you ran, the full error output, and your Windows version.</p>
             </section>
         </main>
     </div>
 
     <footer>
-        <p>&copy; 2026 Dev-CLI. Built with ❤️ and <span class="rust-color">Rust</span>.</p>
+        <p>&copy; <span class="footer-year">2026</span> Dev-CLI. Built with ❤️ and <span class="rust-color">Rust</span>.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="tools-data.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
 </html>

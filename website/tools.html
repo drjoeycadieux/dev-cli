@@ -4,158 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Tools | Dev-CLI</title>
+    <meta name="description" content="Browse every developer tool Dev-CLI can install on Windows with a single command — Node.js, Python, Rust, Docker, Git and more.">
+    <meta name="theme-color" content="#09090b">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Available Tools | Dev-CLI">
+    <meta property="og:description" content="22 curated developer tools, one command away. Search the full Dev-CLI catalog.">
+    <meta property="og:url" content="https://dev-cli.netlify.app/tools.html">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2309090b'/%3E%3Ctext x='14' y='45' font-family='monospace' font-size='38' fill='%2306b6d4'%3E%26gt;_%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 4rem 10%;
-        }
-        .tool-card {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            padding: 2rem;
-            border-radius: 20px;
-            transition: 0.3s;
-        }
-        .tool-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-5px);
-        }
-        .tool-card h2 {
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-        .tool-card .id {
-            font-family: monospace;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            display: block;
-        }
-        .tool-card p {
-            font-size: 0.95rem;
-            color: #d1d5db;
-            margin-bottom: 1.5rem;
-        }
-        .tool-card .install-cmd {
-            background: #000;
-            padding: 0.8rem;
-            border-radius: 8px;
-            font-family: monospace;
-            font-size: 0.9rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .tool-card .copy-mini {
-            color: var(--primary);
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.8rem;
-        }
-        header {
-            text-align: center;
-            padding: 6rem 10% 2rem;
-        }
-        header h1 { font-size: 3.5rem; margin-bottom: 1rem; }
-        header p { color: var(--text-muted); font-size: 1.2rem; }
-    </style>
 </head>
 <body>
     <div class="background-blob blob-1"></div>
     <div class="background-blob blob-2"></div>
-    
+
+    <a href="#main" class="skip-link">Skip to content</a>
+
     <nav>
         <a href="index.html" class="logo">dev-cli<span>.</span></a>
-        <div class="nav-links">
+        <div class="nav-links" id="nav-links">
             <a href="index.html#features">Features</a>
-            <a href="tools.html" class="active">Tools</a>
+            <a href="index.html#how-it-works">How It Works</a>
+            <a href="index.html#demo">Demo</a>
+            <a href="tools.html" class="active" aria-current="page">Tools</a>
             <a href="docs.html">Docs</a>
             <a href="https://github.com/drjoeycadieux/dev-cli" class="github-btn">GitHub</a>
         </div>
-        <button class="mobile-menu-btn" aria-label="Toggle menu">
-            <div class="hamburger"></div>
+        <button type="button" class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+            <span class="hamburger" aria-hidden="true"></span>
         </button>
     </nav>
 
-    <header>
+    <header class="page-header" id="main">
         <h1>Curated <span class="gradient-text">Tools</span></h1>
         <p>A list of battle-tested tools you can install instantly.</p>
     </header>
 
-    <div class="tools-grid">
-        <!-- Node.js -->
-        <div class="tool-card">
-            <h2>Node.js</h2>
-            <span class="id">OpenJS.NodeJS</span>
-            <p>JavaScript runtime built on Chrome's V8 JavaScript engine.</p>
-            <div class="install-cmd">
-                <code>dev-cli install nodejs</code>
-                <span class="copy-mini">COPY</span>
+    <section class="tools-section" aria-labelledby="tools-heading">
+        <h2 id="tools-heading" class="visually-hidden">Search developer tools</h2>
+
+        <div class="tools-toolbar">
+            <div class="search-field">
+                <span class="search-icon" aria-hidden="true">⌕</span>
+                <label for="tool-search" class="visually-hidden">Search tools</label>
+                <input id="tool-search" type="search" placeholder="Search tools, IDs or categories…"
+                       autocomplete="off" spellcheck="false" aria-describedby="tool-count">
+                <kbd class="search-kbd" aria-hidden="true">/</kbd>
             </div>
+            <p class="tool-count" id="tool-count" role="status" aria-live="polite"></p>
         </div>
-        <!-- Python -->
-        <div class="tool-card">
-            <h2>Python</h2>
-            <span class="id">Python.Python.3</span>
-            <p>Interpreted, high-level, general-purpose programming language.</p>
-            <div class="install-cmd">
-                <code>dev-cli install python</code>
-                <span class="copy-mini">COPY</span>
-            </div>
+
+        <div class="category-chips" id="category-chips" role="group" aria-label="Filter by category"></div>
+
+        <div class="tools-grid" id="tools-grid">
+            <noscript>
+                <div class="empty-state">
+                    <p>Enable JavaScript to search and filter the catalog, or run <code>dev-cli list</code> to see every tool in your terminal.</p>
+                </div>
+            </noscript>
         </div>
-        <!-- Git -->
-        <div class="tool-card">
-            <h2>Git</h2>
-            <span class="id">Git.Git</span>
-            <p>Distributed version control system for tracking changes.</p>
-            <div class="install-cmd">
-                <code>dev-cli install git</code>
-                <span class="copy-mini">COPY</span>
-            </div>
+
+        <div class="empty-state" id="tools-empty" hidden>
+            <span class="empty-icon" aria-hidden="true">🔍</span>
+            <p>No tools match your search.</p>
+            <button type="button" class="btn secondary small" id="clear-filters">Clear filters</button>
         </div>
-        <!-- VS Code -->
-        <div class="tool-card">
-            <h2>VS Code</h2>
-            <span class="id">Microsoft.VisualStudioCode</span>
-            <p>Streamlined code editor with support for debugging and Git.</p>
-            <div class="install-cmd">
-                <code>dev-cli install vscode</code>
-                <span class="copy-mini">COPY</span>
-            </div>
-        </div>
-        <!-- Go -->
-        <div class="tool-card">
-            <h2>Go</h2>
-            <span class="id">Google.Go</span>
-            <p>Open-source programming language that makes it easy to build simple, reliable software.</p>
-            <div class="install-cmd">
-                <code>dev-cli install go</code>
-                <span class="copy-mini">COPY</span>
-            </div>
-        </div>
-        <!-- Docker -->
-        <div class="tool-card">
-            <h2>Docker</h2>
-            <span class="id">Docker.DockerDesktop</span>
-            <p>OS-level virtualization to deliver software in containers.</p>
-            <div class="install-cmd">
-                <code>dev-cli install docker</code>
-                <span class="copy-mini">COPY</span>
-            </div>
-        </div>
-    </div>
+    </section>
 
     <footer>
-        <p>&copy; 2026 Dev-CLI. Built with ❤️ and <span class="rust-color">Rust</span>.</p>
+        <p>&copy; <span class="footer-year">2026</span> Dev-CLI. Built with ❤️ and <span class="rust-color">Rust</span>.</p>
     </footer>
 
-    <script src="script.js"></script>
-    <script src="script.js"></script>
+    <script src="tools-data.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
